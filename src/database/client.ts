@@ -1,6 +1,6 @@
-import { Pool } from "pg";
+import { Pool, QueryResultRow } from "pg";
 
-import { DATABASE_URL } from "src/config";
+import { DATABASE_URL } from "../config";
 
 export class DatabaseClient {
   private static instance: DatabaseClient | null = null;
@@ -36,12 +36,12 @@ export class DatabaseClient {
     return this.connection;
   }
 
-  async query(sql: string, params: unknown[]) {
+  async query<T extends QueryResultRow>(sql: string, params: unknown[]) {
     if (!this.connection) {
       throw new Error('Must connect to database before querying')
     }
 
-    return this.connection.query(sql, params);
+    return this.connection.query<T>(sql, params);
   }
 
   async disconnect() {
