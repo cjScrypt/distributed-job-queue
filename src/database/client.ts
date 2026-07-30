@@ -35,4 +35,20 @@ export class DatabaseClient {
 
     return this.connection;
   }
+
+  async query(sql: string, params: unknown[]) {
+    if (!this.connection) {
+      throw new Error('Must connect to database before querying')
+    }
+
+    return this.connection.query(sql, params);
+  }
+
+  async disconnect() {
+    if (!this.connection) {
+      return;
+    }
+
+    return this.connection.end();
+  }
 }

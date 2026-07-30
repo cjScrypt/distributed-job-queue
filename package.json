@@ -8,13 +8,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start:api": "node dist/api/index.js",
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
     "dotenv": "^17.4.2",
-    "pg": "^8.22.0"
+    "express": "^5.2.1",
+    "pg": "^8.22.0",
+    "pino": "^10.3.1",
+    "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
