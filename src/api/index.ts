@@ -5,6 +5,7 @@ import { json, urlencoded } from 'body-parser';
 import { PORT } from "../config";
 import { DatabaseClient } from "../database";
 import { jobRouter } from "./routers";
+import { appErrorHandler } from "./middlewares";
 
 const apiApp = () => {
   const db = DatabaseClient.getInstance();
@@ -15,6 +16,7 @@ const apiApp = () => {
   app.use(urlencoded({ extended: false }));
 
   app.use(jobRouter);
+  app.use(appErrorHandler);
 
   app.listen(PORT, () => {
     console.log(`======= App running on port ${PORT} =======`);
