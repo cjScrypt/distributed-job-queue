@@ -4,6 +4,7 @@ CREATE TYPE JOB_STATE AS ENUM ('pending', 'active', 'completed', 'dead');
 CREATE TABLE jobs (
   id                BIGSERIAL       PRIMARY KEY,
   handler           TEXT            NOT NULL,                 -- Which handler runs it
+  type              TEXT
   state             JOB_STATE       NOT NULL DEFAULT 'pending', -- The current state of teh job
   payload           JSONB           NOT NULL,
 

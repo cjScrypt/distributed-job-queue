@@ -8,6 +8,7 @@ export const createJob = async (req: Request, res: Response, next: NextFunction)
 
     await new JobService().enqueue({
       handler: data.handler,
+      type: data.type,
       payload: data.payload,
       idempotencyKey: data.idempotencyKey,
       delaySeconds: data.delaySeconds,

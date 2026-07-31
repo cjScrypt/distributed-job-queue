@@ -4,6 +4,9 @@ export class CreateJobDto {
   @IsString()
   handler: string;
 
+  @IsString()
+  type: string;
+
   @IsObject()
   payload: Record<string, string>;
 
