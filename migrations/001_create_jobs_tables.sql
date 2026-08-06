@@ -3,7 +3,7 @@ CREATE TYPE JOB_STATE AS ENUM ('pending', 'active', 'completed', 'dead');
 -- Queue table, each row represents a job
 CREATE TABLE jobs (
   id                BIGSERIAL       PRIMARY KEY,
-  type              TEXT
+  type              TEXT,
   state             JOB_STATE       NOT NULL DEFAULT 'pending', -- The current state of teh job
   payload           JSONB           NOT NULL,
 
@@ -18,7 +18,8 @@ CREATE TABLE jobs (
 
   idempotency_key   TEXT            UNIQUE,
 
-  created_at        TIMESTAMPTZ     NOT NULL DEFAULT now()
+  created_at        TIMESTAMPTZ     NOT NULL DEFAULT now(),
+  updated_at        TIMESTAMPTZ     NOT NULL DEFAULT now()
 );
 
 -- A guard the worker writes to in the same transaction.

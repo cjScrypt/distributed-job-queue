@@ -1,11 +1,9 @@
-import { IsInt, IsObject, IsOptional, IsString, Min } from "class-validator";
+import { IsEnum, IsInt, IsObject, IsOptional, IsString, Min } from "class-validator";
+import { JobHandler } from "../../worker/enums";
 
 export class CreateJobDto {
-  @IsString()
-  handler: string;
-
-  @IsString()
-  type: string;
+  @IsEnum(JobHandler)
+  type: JobHandler;
 
   @IsObject()
   payload: Record<string, string>;

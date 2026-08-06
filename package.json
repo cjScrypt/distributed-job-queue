@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:api": "node dist/api/index.js",
-    "build": "tsc -p tsconfig.build.json",
+    "start:worker": "node dist/worker/index.js",
+    "build": "tsc",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
