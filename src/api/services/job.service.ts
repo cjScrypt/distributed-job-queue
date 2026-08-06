@@ -5,14 +5,14 @@ export class JobService {
   private db = DatabaseClient.getInstance();
 
   async enqueue(input: EnqueueInput): Promise<EnqueuedJob> {
-    const { handler, type, payload, idempotencyKey, delaySeconds, maxAttempts } = input;
+    const { type, payload, idempotencyKey, delaySeconds, maxAttempts } = input;
 
     const insert = await this.db.query<{id: string, state: string}>(
-      `INSERT INTO jobs (handler, type, payload, idempotency_key, run_at, max_attempts)
-      VALUES ($1, $2, $3, $4, now() + ($5 * interval '1 second'), COALESCE($6, 5))
+      `INSERT INTO jobs (type, payload, idempotency_key, run_at, max_attempts)
+      VALUES ($1, $2, $3, now() + ($4 * interval '1 second'), COALESCE($5, 5))
       ON CONFLICT (idempotency_key) DO NOTHING
       RETURNING id, state`,
-      [handler, type, payload, idempotencyKey ?? null, delaySeconds ?? 0, maxAttempts ?? null],
+      [type, payload, idempotencyKey ?? null, delaySeconds ?? 0, maxAttempts ?? null],
     );
     if (insert.rows.length > 0) {
       const row = insert.rows[0];

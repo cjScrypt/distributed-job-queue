@@ -1,5 +1,4 @@
 export interface EnqueueInput {
-  handler: string;
   type: string;
   payload: unknown;
   idempotencyKey?: string;

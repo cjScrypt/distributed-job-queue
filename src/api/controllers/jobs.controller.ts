@@ -7,7 +7,6 @@ export const createJob = async (req: Request, res: Response, next: NextFunction)
     const data = req.body as CreateJobDto;
 
     await new JobService().enqueue({
-      handler: data.handler,
       type: data.type,
       payload: data.payload,
       idempotencyKey: data.idempotencyKey,
