@@ -1,7 +1,7 @@
-import { JobHandler } from "../../worker/enums";
+import { JobHandlerKey } from "src/worker/enums";
 
 export interface EnqueueInput {
-  type: JobHandler;
+  type: JobHandlerKey;
   payload: unknown;
   idempotencyKey?: string;
   delaySeconds?: number;

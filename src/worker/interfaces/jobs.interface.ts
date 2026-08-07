@@ -1,13 +1,13 @@
-import { JobHandler } from "../enums";
+import { JobHandlerKey } from '../enums';
 
 export type JobState = "pending" | "active" | "completed" | "dead";
 
 export interface Job {
   id: string;
   handler: string;
-  type: JobHandler;
+  type: JobHandlerKey;
   state: JobState;
-  payload: unknown;
+  payload: any;
 
   run_at: Date;
 
@@ -22,3 +22,7 @@ export interface Job {
 
   created_at: Date;
 }
+
+export type JobHandler = (payload: any) => Promise<void>;
+
+export type HandlerRegistry = Record<JobHandlerKey, JobHandler>;
